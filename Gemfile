@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'omniauth-linkedin-oauth2'
+gem 'pry', group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
