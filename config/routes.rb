@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root to: 'pages#welcome'
 
   get 'profile', to: 'pages#profile', as: 'profile'
+  get 'my_profile', to: 'omniauth_callbacks', as: 'my_profile'
 
 end
