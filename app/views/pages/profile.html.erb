@@ -1,13 +1,13 @@
-Welcome <%= @user.first_name %>
-<br/>Summa your info:<br/>
-<%= @user.first_name %>
-<br/>
-<%= @user.last_name %>
-<br/>
-<%= @user.email %>
-<br/>
-<%= @user.uid %>
-<%= @user.headline %>
-<%= @user.industry %>
-<%= image_tag @user.pic_url %>
-
+<div class="container">
+  <h3>Welcome <%= @user.first_name %></h3>
+  <%= @user.first_name %>
+  <%= @user.last_name %>
+  <br/>
+  <%= @user.email %>
+  <br/>
+  <%= @user.headline %>
+  <br/>
+  <%= @user.industry %>
+  <br/>
+  <%= image_tag @user.pic_url %>
+</div>
