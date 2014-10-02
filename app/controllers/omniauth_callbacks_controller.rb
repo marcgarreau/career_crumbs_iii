@@ -46,7 +46,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     jobs_response    = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions?format=json")
     @jobs            = JSON(jobs_response.body)["jobs"].values[1]
-    profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location)?format=json")
+    profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location,email-address)?format=json")
     body             = JSON(profile_response.body)
     educations       = body["educations"].values[1]
     positions        = body["positions"].values[1]
@@ -57,7 +57,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     picture_url      = body["pictureUrl"]
     headline         = body["headline"]
     email_address    = body["emailAddress"]
-    @user    = current_user
+
+    @user = User.find_by_email(email_address) || User.create(
+      email:      email_address,
+      first_name: first_name,
+      last_name:  last_name,
+      headline:   headline,
+      industry:   industry,
+      pic_url:    picture_url
+    )
+
+
     binding.pry
 #    if user.persisted?
 #      flash.notice = "Signed in!"
