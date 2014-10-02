@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   def welcome
   end
 
-  def profile
+  def i
     @user = current_user
   end
 end

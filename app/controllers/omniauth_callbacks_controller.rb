@@ -69,8 +69,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     jobs          = JSON(jobs_response.body)["jobs"].values[1]
     jobs.each do |job|
       @user.jobs.create(
-        title:   job.title,
-        company: job.company
+        company: job["company"]["name"],
+        description: job["descriptionSnippet"],
+        location: job["locationDescription"],
+        linkedin_id: job["id"]
       )
     end
 

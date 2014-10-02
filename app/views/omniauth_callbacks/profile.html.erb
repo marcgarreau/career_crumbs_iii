@@ -12,10 +12,11 @@
     <br/>
 
     <h4>Positions</h4>
-    <% @positions.each do |position| %>
-      <%= position["company"]["name"] %>
+    <% if @user.positions.any? %>
+      <% @user.positions.each do |position| %>
+        <%= position.company %>
+      <% end %>
     <% end %>
-
 
   </div>
 </div>

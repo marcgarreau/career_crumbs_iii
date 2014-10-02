@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'pages#welcome'
 
-  get 'x_profile', to: 'pages#profile', as: 'x_profile'
+  get 'i', to: 'pages#i', as: 'i'
+
   devise_scope :user do
     get 'login',      to: 'omniauth_callbacks#index',      as: 'login'
     get 'my_profile', to: 'omniauth_callbacks#my_profile', as: 'my_profile'

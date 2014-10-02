@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  references: 
+  company: MyString
+  description: MyText
+  location: MyString
+  linkedin_id: 1
+
+two:
+  references: 
+  company: MyString
+  description: MyText
+  location: MyString
+  linkedin_id: 1

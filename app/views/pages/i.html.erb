@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="profile-container">
+    <h3>Welcome, <%= @user.first_name %></h3>
+    <%= @user.first_name %>
+    <%= @user.last_name %>
+    <br/>
+    <%= @user.headline %>
+    <br/>
+    <strong>Industry:</strong> <%= @user.industry %>
+    <br/>
+    <%= image_tag @user.pic_url %>
+    <br/>
+
+    <div class="suggested-job-title">Positions you may be interest in:</div>
+
+    <% if @user.jobs.any? %>
+      <% @user.jobs.each do |job| %>
+        <span class="suggested-job-company"><%= job.company %></span>
+        <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
+        <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
+      <% end %>
+    <% end %>
+
+  </div>
+</div>
+
+pages#i

@@ -16,8 +16,21 @@
  *= require_self
  */
 
+
+// PROFILE PAGE! //
 .profile-container {
   # border: 3px solid black;
 }
 
+.suggested-job-title {
+  font-size: 28px;
+}
 
+.suggested-job-company {
+  font-size:    20px;
+  font-weight:  bold;
+}
+
+.suggested-job-loc {
+  font-style: italic;
+}

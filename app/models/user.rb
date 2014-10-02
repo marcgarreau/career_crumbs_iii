@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :omniauthable,
          :trackable
+  has_many :jobs
 
   validates :encrypted_password, presence: true, allow_blank: true
 
