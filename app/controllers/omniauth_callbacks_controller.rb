@@ -15,7 +15,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def all
-    @user = User.from_omniauth(request.env["omniauth.auth"])
     authorize
   end
 
@@ -32,6 +31,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def profile
+#    @user = User.from_omniauth(request.env["omniauth.auth"])
     code  = params[:code]
     state = params[:state]
     if state != STATE
@@ -44,9 +44,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       })
     end
 
-    response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions")
-    @jobs    = JSON.parse(response.body)
+    jobs_response    = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions?format=json")
+    @jobs            = JSON(jobs_response.body)["jobs"].values[1]
+    profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location)?format=json")
+    body             = JSON(profile_response.body)
+    educations       = body["educations"].values[1]
+    positions        = body["positions"].values[1]
+    industry         = body["industry"]
+    last_name        = body["lastName"]
+    first_name       = body["firstName"]
+    location         = body["location"]
+    picture_url      = body["pictureUrl"]
+    headline         = body["headline"]
+    email_address    = body["emailAddress"]
     @user    = current_user
+    binding.pry
 #    if user.persisted?
 #      flash.notice = "Signed in!"
 #      sign_in_and_redirect user
