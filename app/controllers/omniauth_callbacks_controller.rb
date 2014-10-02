@@ -23,6 +23,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def authorize
+    binding.pry
     redirect_to client.auth_code.authorize_url(
       :scope => "r_fullprofile rw_nus r_emailaddress r_network",
       :state => STATE,
