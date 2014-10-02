@@ -1,2 +1,17 @@
+<div class="container">
+  <div class="profile-container">
+    <h3>Welcome, <%= @user.first_name %></h3>
+    <%= @user.first_name %>
+    <%= @user.last_name %>
+    <br/>
+    <%= @user.headline %>
+    <br/>
+    <strong>Industry:</strong> <%= @user.industry %>
+    <br/>
+    <%= image_tag @user.pic_url %>
+    <br/>
+  </div>
+</div>
 
-Hello world! You're on omniauth#accept
+Hello world! You're on omniauth#profile
+
