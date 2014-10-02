@@ -18,6 +18,7 @@
         <span class="suggested-job-company"><%= job.company %></span>
         <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
         <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
+        <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s %><br/><br/>
       <% end %>
     <% end %>
 
