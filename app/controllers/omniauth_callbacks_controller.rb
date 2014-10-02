@@ -44,9 +44,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         :header_format => 'Bearer %s',
         :ssl => {:verify => false}
       })
-      binding.pry
     end
-    response = access_token.get("http://api.linkedin.com/v1/people/~/suggestions/job-suggestions")
+
+    response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions")
+
 #    if user.persisted?
 #      flash.notice = "Signed in!"
 #      sign_in_and_redirect user
