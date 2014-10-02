@@ -23,7 +23,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def authorize
-    binding.pry
     redirect_to client.auth_code.authorize_url(
       :scope => "r_fullprofile rw_nus r_emailaddress r_network",
       :state => STATE,
@@ -38,18 +37,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if state != STATE
       raise "state has changed. that's fishy."
     else
-      token = client.auth_code.get_token(code, :redirect_uri => REDIRECT_URI)
-      access_token = OAuth2::AccessToken.new(client, token.token, {
+      token ||= client.auth_code.get_token(code, :redirect_uri => REDIRECT_URI)
+      access_token ||= OAuth2::AccessToken.new(client, token.token, {
         :mode => :header,
         :header_format => 'Bearer %s'
       })
     end
 
-    jobs_response    = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions?format=json")
-    @jobs            = JSON(jobs_response.body)["jobs"].values[1]
     profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location,email-address)?format=json")
     body             = JSON(profile_response.body)
-    educations       = body["educations"].values[1]
+#   educations   = body["educations"].values[1]
     positions        = body["positions"].values[1]
     industry         = body["industry"]
     last_name        = body["lastName"]
@@ -68,18 +65,25 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       pic_url:    picture_url
     )
 
+    jobs_response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions?format=json")
+    jobs          = JSON(jobs_response.body)["jobs"].values[1]
+    jobs.each do |job|
+      @user.jobs.create(
+        title:   job.title,
+        company: job.company
+      )
+    end
 
-    binding.pry
-#    if user.persisted?
-#      flash.notice = "Signed in!"
-#      sign_in_and_redirect user
-#    else
-#      session["devise.user_attributes"] = user.attributes
-#      flash.notice = "Something went wrong"
-#      redirect_to new_user_session_path
-#    end
+    if @user.persisted?
+      binding.pry
+      flash.notice = "Signed in!"
+      sign_in_and_redirect @user
+    else
+      session["devise.user_attributes"] = @user.attributes
+      flash.notice = "Something went wrong"
+      redirect_to new_user_session_path
+    end
   end
-
 
   alias_method :linkedin, :all
 end

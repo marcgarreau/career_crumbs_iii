@@ -10,8 +10,13 @@
     <br/>
     <%= image_tag @user.pic_url %>
     <br/>
+
+    <h4>Positions</h4>
+    <% @positions.each do |position| %>
+      <%= position["company"]["name"] %>
+    <% end %>
+
+
   </div>
 </div>
-
-Hello world! You're on omniauth#profile
 
