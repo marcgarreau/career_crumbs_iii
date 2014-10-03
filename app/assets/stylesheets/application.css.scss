@@ -19,16 +19,28 @@
 
 // PROFILE PAGE! //
 .profile-container {
+  background-color: #F9FFED;
+  padding: 15px;
+  margin: 15px 0;
   # border: 3px solid black;
+}
+.job-box {
+  background-color: #F3EDFF;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.suggested-job-head {
+  font-size: 28px;
 }
 
 .suggested-job-title {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .suggested-job-company {
   font-size:    20px;
-  font-weight:  bold;
+#  font-weight:  bold;
 }
 
 .suggested-job-loc {

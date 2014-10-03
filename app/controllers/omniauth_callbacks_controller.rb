@@ -65,10 +65,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       pic_url:    picture_url
     )
 
-    jobs_response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions?format=json")
+    jobs_response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions:(jobs:(position:(title),company:(name),id,description-snippet,location-description))?format=json")
     jobs          = JSON(jobs_response.body)["jobs"].values[1]
+    binding.pry
     jobs.each do |job|
       @user.jobs.create(
+        title:       job["position"]["title"],
         company:     job["company"]["name"],
         description: job["descriptionSnippet"],
         location:    job["locationDescription"],

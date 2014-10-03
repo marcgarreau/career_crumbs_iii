@@ -10,19 +10,20 @@
     <br/>
     <%= image_tag @user.pic_url %>
     <br/>
+  </div>
+  <div class="suggested-job-head">Positions you may be interested in:</div>
 
-    <div class="suggested-job-title">Positions you may be interest in:</div>
-
-    <% if @user.jobs.any? %>
-      <% @user.jobs.each do |job| %>
+  <% if @user.jobs.any? %>
+    <% @user.jobs.each do |job| %>
+      <div class="job-box">
+        <span class="suggested-job-title"><%= job.title %></span><br/>
         <span class="suggested-job-company"><%= job.company %></span>
         <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
         <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
-        <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s %><br/><br/>
-      <% end %>
+        <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
+      </div>
     <% end %>
-
-  </div>
+  <% end %>
 </div>
 
 pages#i
