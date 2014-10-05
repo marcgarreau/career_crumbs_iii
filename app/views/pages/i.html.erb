@@ -11,6 +11,12 @@
     <%= image_tag @user.pic_url %>
     <br/>
   </div>
+  <div class="job-words">
+    <h3>Top words found in those positions:</h3>
+    <% @top_job_words.each do |word, occurences| %>
+      <%= word %> <span class="badge"><%= occurences %></span> |
+    <% end %>
+  </div>
   <div class="suggested-job-head">Positions you may be interested in:</div>
 
   <% if @user.jobs.any? %>
