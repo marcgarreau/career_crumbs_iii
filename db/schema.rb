@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20141002205812) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "location"
     t.string   "provider"
     t.string   "uid"
     t.string   "headline"

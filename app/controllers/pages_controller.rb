@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   private
 
   def find_top_meetups_for(user, top_job_words)
-    location = user.jobs[0].location.gsub(" ", "")
+    location = user.location.gsub(" ", "")
     meetups = []
     top_job_words.each do |word, _|
       if word.strip != ""
@@ -28,7 +28,7 @@ class PagesController < ApplicationController
     }
 
     job_words = []
-    @user.jobs[0..9].each do |job|
+    @user.jobs[0..14].each do |job|
       page = a.get('https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s)
       job_words << page.search(".skills-section").text
     end
@@ -42,7 +42,9 @@ class PagesController < ApplicationController
        "years", "have", "related", "for", "preferred", "is", "an",
        "on", "as", "\t", "\n", " ", "other", "1", "using", "year",
        "including", "good", "content", "environment", "qualifications",
-       "plus"]
+       "plus", "organizational", "multiple", "minimum", "deadlines",
+       "be", "working", "familiarity", "degree", "team", "demonstrated",
+       "one"]
     top_filtered_words = []
     top_fifteen_words.each do |word, occurences|
       top_filtered_words << [word, occurences] unless omitted_words.include?(word)

@@ -46,12 +46,12 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location,email-address)?format=json")
     body             = JSON(profile_response.body)
-    educations   = body["educations"].values[1]
+    educations       = body["educations"].values[1]
     positions        = body["positions"].values[1]
     industry         = body["industry"]
     last_name        = body["lastName"]
     first_name       = body["firstName"]
-    location         = body["location"]
+    location         = body["location"]["name"]
     picture_url      = body["pictureUrl"]
     headline         = body["headline"]
     email_address    = body["emailAddress"]
@@ -60,6 +60,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
       email:      email_address,
       first_name: first_name,
       last_name:  last_name,
+      location:   location,
       headline:   headline,
       industry:   industry,
       pic_url:    picture_url

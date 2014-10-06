@@ -25,9 +25,11 @@
         <h3>Suggested Meetup groups based on those words:</h3>
         <% @meetups_to_show.each do |meetup, word| %>
           <% if meetup != nil %>
-            Based on <strong><%= word %></strong>, we found:<br/>
-            <%= meetup["name"] %> (<%= meetup["city"] %>)<br/>
-            <%= link_to "View on Meetup", meetup["link"], class: "btn btn-default" %><br/><br/>
+            <div class="meetup-box">
+              Based on <strong><%= word %></strong>, we found:<br/>
+              <%= meetup["name"] %> (<%= meetup["city"] %>)<br/><br/>
+              <%= link_to "View on Meetup", meetup["link"], class: "btn btn-default" %><br/>
+            </div>
           <% end %>
         <% end %>
       </div>
