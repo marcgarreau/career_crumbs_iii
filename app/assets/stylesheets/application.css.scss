@@ -15,14 +15,30 @@
  *= require_tree .
  *= require_self
  */
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Muli:300,400);
+@import url(http://fonts.googleapis.com/css?family=Arvo:400,700);
 
+body {
+  font-family: 'Arvo', serif;
+}
 
 // PROFILE PAGE! //
+.welcome-user-title {
+  font-size: 38px;
+  font-weight: bold;
+  color: #060840;
+}
+
 .profile-container {
-  background-color: #F9FFED;
+  background-color: #060840;
   padding: 15px;
-  margin: 15px 0;
+  margin: -14px 0 0 0;
+  color: white;
   # border: 3px solid black;
+}
+
+.profile-pic {
 }
 
 .meetup-box {

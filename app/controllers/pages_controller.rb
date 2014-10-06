@@ -44,7 +44,7 @@ class PagesController < ApplicationController
        "including", "good", "content", "environment", "qualifications",
        "plus", "organizational", "multiple", "minimum", "deadlines",
        "be", "working", "familiarity", "degree", "team", "demonstrated",
-       "one"]
+       "one", "all", "building", "at", "andor"]
     top_filtered_words = []
     top_fifteen_words.each do |word, occurences|
       top_filtered_words << [word, occurences] unless omitted_words.include?(word)

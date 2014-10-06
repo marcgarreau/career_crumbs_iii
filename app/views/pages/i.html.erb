@@ -1,8 +1,9 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
+      <span class="welcome-user-title">Welcome, <%= @user.first_name %></span>
       <div class="profile-container">
-        <h3>Welcome, <%= @user.first_name %></h3>
+        <span class="profile-pic"><%= image_tag @user.pic_url %></span>
         <%= @user.first_name %>
         <%= @user.last_name %>
         <br/>
@@ -10,10 +11,27 @@
         <br/>
         <strong>Industry:</strong> <%= @user.industry %>
         <br/>
-        <%= image_tag @user.pic_url %>
-        <br/>
       </div>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-6">
+      <div class="suggested-job-head"><%= @user.jobs.count %> positions you may be interested in:</div>
+
+      <% if @user.jobs.any? %>
+        <% @user.jobs.each do |job| %>
+          <div class="job-box">
+            <span class="suggested-job-title"><%= job.title %></span><br/>
+            <span class="suggested-job-company"><%= job.company %></span>
+            <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
+            <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
+            <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-md-6">
       <div class="job-words">
         <h3>Top words found in those positions:</h3>
         <% @top_job_words.each do |word, occurences| %>
@@ -33,22 +51,6 @@
           <% end %>
         <% end %>
       </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="suggested-job-head"><%= @user.jobs.count %> positions you may be interested in:</div>
-
-      <% if @user.jobs.any? %>
-        <% @user.jobs.each do |job| %>
-          <div class="job-box">
-            <span class="suggested-job-title"><%= job.title %></span><br/>
-            <span class="suggested-job-company"><%= job.company %></span>
-            <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
-            <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
-            <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
-          </div>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>
