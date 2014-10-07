@@ -32,9 +32,11 @@ gem 'autoprefixer-rails'
 gem 'mechanize'
 gem 'httparty'
 gem 'chartkick'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'capybara'
 end
 
 group :development do
