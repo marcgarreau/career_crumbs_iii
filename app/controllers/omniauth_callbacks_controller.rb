@@ -31,9 +31,21 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def profile
-#    @user = User.from_omniauth(request.env["omniauth.auth"])
-    code  = params[:code]
-    state = params[:state]
+    access_token = build_access_token(params[:code], params[:state])
+    get_user_from_linkedin(access_token)
+    find_or_build_user(access_token)
+
+    if @user.persisted?
+      flash.notice = "Welcome, #{@user.first_name}! You're logged in."
+      sign_in_and_redirect @user
+    else
+      session["devise.user_attributes"] = @user.attributes
+      flash.notice = "Something went wrong. Please try again."
+      redirect_to new_user_session_path
+    end
+  end
+
+  def build_access_token(code, state)
     if state != STATE
       raise "state has changed. that's fishy."
     else
@@ -43,33 +55,50 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         :header_format => 'Bearer %s'
       })
     end
+    access_token
+  end
 
+  def find_or_build_user(access_token)
+    if User.find_by_email(@email_address)
+      @user = User.find_by_email(@email_address)
+    else
+      @user = build_user
+      build_jobs(access_token)
+      scrape_jobs_and_build_words
+    end
+  end
+
+  def get_user_from_linkedin(access_token)
     profile_response = access_token.get("https://api.linkedin.com/v1/people/~:(first-name,last-name,industry,positions,educations,picture-url,headline,location,email-address)?format=json")
     body             = JSON(profile_response.body)
-    educations       = body["educations"].values[1]
-    positions        = body["positions"].values[1]
-    industry         = body["industry"]
-    last_name        = body["lastName"]
-    first_name       = body["firstName"]
-    location         = body["location"]["name"]
-    picture_url      = body["pictureUrl"]
-    headline         = body["headline"]
-    email_address    = body["emailAddress"]
+    @educations       = body["educations"].values[1]
+    @positions        = body["positions"].values[1]
+    @industry         = body["industry"]
+    @last_name        = body["lastName"]
+    @first_name       = body["firstName"]
+    @location         = body["location"]["name"]
+    @picture_url      = body["pictureUrl"]
+    @headline         = body["headline"]
+    @email_address    = body["emailAddress"]
+  end
 
-    @user = User.find_by_email(email_address) || User.create(
-      email:      email_address,
-      first_name: first_name,
-      last_name:  last_name,
-      location:   location,
-      headline:   headline,
-      industry:   industry,
-      pic_url:    picture_url
+  def build_user
+    @user = User.create(
+      email:      @email_address,
+      first_name: @first_name,
+      last_name:  @last_name,
+      location:   @location,
+      headline:   @headline,
+      industry:   @industry,
+      pic_url:    @picture_url
     )
+  end
 
+  def build_jobs(access_token)
     jobs_response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions:(jobs:(position:(title),company:(name),id,description-snippet,location-description))?format=json")
-    jobs          = JSON(jobs_response.body)["jobs"].values[1][0..14]
+    jobs          = JSON(jobs_response.body)["jobs"].values[1][0..9]
     jobs.each do |job|
-      @user.jobs.create(
+      @user.jobs.build(
         title:       job["position"]["title"],
         company:     job["company"]["name"],
         description: job["descriptionSnippet"],
@@ -77,13 +106,16 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         linkedin_id: job["id"]
       )
     end
+    @user.save
+  end
 
+  def scrape_jobs_and_build_words
     a = Mechanize.new { |agent|
      agent.user_agent_alias = 'Mac Safari'
     }
 
     job_words = []
-    @user.jobs[0..14].each do |job|
+    @user.jobs[0..9].each do |job|
       page = a.get('https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s)
       job_words << page.search(".skills-section").text
     end
@@ -95,34 +127,25 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
        "to", "●", "•", "skills", "experience", "with", "knowledge",
        "strong", "work", "must", "required", "desired", "ability",
        "years", "have", "related", "for", "preferred", "is", "an",
-       "on", "as", "\t", "\n", " ", "other", "1", "2", "3", "using",
+       "on", "as", "\t", "\n", " ", "other", "1", "2", "3", "4", "5",
        "including", "good", "content", "environment", "qualifications",
        "plus", "organizational", "multiple", "minimum", "deadlines",
        "be", "working", "familiarity", "degree", "team", "demonstrated",
        "one", "all", "building", "at", "andor", "you", "are", "up",
-       "that", "if", "able", "more", "year", "your"]
+       "that", "if", "able", "more", "year", "your", "using"]
 
     top_filtered_words = []
     top_fifteen_words.each do |word, occurrences|
       top_filtered_words << [word, occurrences] unless omitted_words.include?(word)
     end
-#    session["top_words"] = top_filtered_words
+
     top_filtered_words.each do |word, occurrences|
-      @user.words.create(
+      @user.words.build(
         value: word,
         occurrences: occurrences
       )
     end
-
-
-    if @user.persisted?
-      flash.notice = "Signed in!"
-      sign_in_and_redirect @user
-    else
-      session["devise.user_attributes"] = @user.attributes
-      flash.notice = "Something went wrong"
-      redirect_to new_user_session_path
-    end
+    @user.save
   end
 
   alias_method :linkedin, :all

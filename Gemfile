@@ -27,12 +27,21 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'omniauth-linkedin-oauth2'
-gem 'pry', group: :development
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'mechanize'
 gem 'httparty'
 gem 'chartkick'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
+group :development do
+  gem 'pry'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
