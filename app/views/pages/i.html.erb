@@ -33,14 +33,14 @@
     </div>
     <div class="col-md-6">
       <div class="job-words">
-        <h3>Top words found in those positions:</h3>
-        <% @top_job_words.each do |word, occurences| %>
-          <%= word %> <span class="badge"><%= occurences %></span> |
-        <% end %>
+        <div class="job-words-head">Top words found in those positions:</div>
+        <div class="word-box">
+          <%= bar_chart @user.words.group(:value).sum(:occurrences), colors: ["#FFC812"], height: "300px" %>
+        </div>
       </div>
 
       <div class="meetup-groups">
-        <h3>Suggested Meetup groups based on those words:</h3>
+        <div class="meetup-groups-head">Suggested Meetup groups:</div>
         <% @meetups_to_show.each do |meetup, word| %>
           <% if meetup != nil %>
             <div class="meetup-box">

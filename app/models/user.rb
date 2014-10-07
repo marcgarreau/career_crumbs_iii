@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :trackable
   has_many :jobs
+  has_many :words
 
   validates :encrypted_password, presence: true, allow_blank: true
 

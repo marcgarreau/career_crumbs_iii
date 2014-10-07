@@ -67,7 +67,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     )
 
     jobs_response = access_token.get("https://api.linkedin.com/v1/people/~/suggestions/job-suggestions:(jobs:(position:(title),company:(name),id,description-snippet,location-description))?format=json")
-    jobs          = JSON(jobs_response.body)["jobs"].values[1]
+    jobs          = JSON(jobs_response.body)["jobs"].values[1][0..14]
     jobs.each do |job|
       @user.jobs.create(
         title:       job["position"]["title"],
@@ -77,6 +77,43 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
         linkedin_id: job["id"]
       )
     end
+
+    a = Mechanize.new { |agent|
+     agent.user_agent_alias = 'Mac Safari'
+    }
+
+    job_words = []
+    @user.jobs[0..14].each do |job|
+      page = a.get('https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s)
+      job_words << page.search(".skills-section").text
+    end
+    format_job_words = job_words.join(" ").downcase.gsub(/[^\w\s]/, "").split(" ")
+    grouped_job_words = format_job_words.group_by {|word| word}.sort_by { |words, occurrences| occurrences.count }.reverse
+    top_fifteen_words = grouped_job_words[0..24].map { |word, occurrences| [word, occurrences.count] }
+
+    omitted_words = ["and", "or", "the", "of", "in", "a", "such",
+       "to", "●", "•", "skills", "experience", "with", "knowledge",
+       "strong", "work", "must", "required", "desired", "ability",
+       "years", "have", "related", "for", "preferred", "is", "an",
+       "on", "as", "\t", "\n", " ", "other", "1", "2", "3", "using",
+       "including", "good", "content", "environment", "qualifications",
+       "plus", "organizational", "multiple", "minimum", "deadlines",
+       "be", "working", "familiarity", "degree", "team", "demonstrated",
+       "one", "all", "building", "at", "andor", "you", "are", "up",
+       "that", "if", "able", "more", "year", "your"]
+
+    top_filtered_words = []
+    top_fifteen_words.each do |word, occurrences|
+      top_filtered_words << [word, occurrences] unless omitted_words.include?(word)
+    end
+#    session["top_words"] = top_filtered_words
+    top_filtered_words.each do |word, occurrences|
+      @user.words.create(
+        value: word,
+        occurrences: occurrences
+      )
+    end
+
 
     if @user.persisted?
       flash.notice = "Signed in!"

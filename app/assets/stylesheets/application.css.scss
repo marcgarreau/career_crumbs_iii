@@ -35,10 +35,30 @@ body {
   padding: 15px;
   margin: -14px 0 0 0;
   color: white;
-  # border: 3px solid black;
 }
 
 .profile-pic {
+  display: inline-block;
+}
+
+.job-words-head {
+  font-size: 28px;
+  color: #FFC15E;
+  font-weight: bold;
+  margin: 20px 0 -25px 0;
+}
+
+.word-box {
+  background-color: #FFEEC9;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.meetup-groups-head {
+  font-size: 28px;
+  color: #75C986;
+  font-weight: bold;
+  margin: 20px 0 -25px 0;
 }
 
 .meetup-box {
@@ -55,6 +75,9 @@ body {
 
 .suggested-job-head {
   font-size: 28px;
+  color: #9070B3;
+  font-weight: bold;
+  margin: 20px 0 -25px 0;
 }
 
 .suggested-job-title {
