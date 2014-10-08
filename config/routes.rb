@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   get 'i', to: 'pages#i', as: 'i'
 
+  get 'graph', to: 'user_graphs#show', as: 'graph'
+
   devise_scope :user do
     get 'login',      to: 'omniauth_callbacks#index',      as: 'login'
     get 'my_profile', to: 'omniauth_callbacks#my_profile', as: 'my_profile'

@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CareerCrumbsIii</title>
+  <title>Career Crumbs</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="alert"><%= alert %></p>
-  <p class="notice"><%= notice %></p>
-<%= yield %>
+  <%= render partial: "layouts/shared/navbar" %>
+  <% if alert %>
+    <div class="container">
+      <p class="alert"><%= alert %></p>
+    </div>
+  <% elsif notice %>
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+    </div>
+  <% end %>
+
+  <%= yield %>
 
 </body>
 </html>

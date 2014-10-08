@@ -18,24 +18,32 @@
   <div class="row">
     <div class="col-md-6">
       <div class="suggested-job-head"><%= @user.jobs.count %> positions you may be interested in:</div>
-
-      <% if @user.jobs.any? %>
-        <% @user.jobs.each do |job| %>
-          <div class="job-box">
-            <span class="suggested-job-title"><%= job.title %></span><br/>
-            <span class="suggested-job-company"><%= job.company %></span>
-            <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
-            <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
-            <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
-          </div>
-        <% end %>
+      <% @user.jobs.each do |job| %>
+        <div class="job-box">
+          <span class="suggested-job-title"><%= job.title %></span><br/>
+          <span class="suggested-job-company"><%= job.company %></span>
+          <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
+          <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
+          <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
+        </div>
       <% end %>
     </div>
     <div class="col-md-6">
       <div class="job-words">
         <div class="job-words-head">Top words found in those positions:</div>
-        <div class="word-box">
-          <%= bar_chart @user.words.group(:value).sum(:occurrences), colors: ["#FFC812"], height: "300px" %>
+        <div id="word-box">
+          <div id="word-box">
+            <div style="text-align: center;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
+            <script>
+              $( document ).ready(function () {
+                $( "#word-box").load( "http://familydoctorg.com/Gifs/login.gif");
+                setTimeout(function()
+                {
+                  $( "#word-box" ).load( "/graph" );
+                }, 3000);
+              });
+            </script>
+          </div>
         </div>
       </div>
 
