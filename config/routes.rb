@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'i', to: 'pages#i', as: 'i'
 
+  get 'dashboard', to: 'dashboards#show', as: 'dashboard'
   get 'graph', to: 'user_graphs#show', as: 'graph'
 
   devise_scope :user do
