@@ -35,11 +35,10 @@
           <div id="word-box">
             <div style="text-align: center;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
             <script>
-              $( document ).ready(function () {
-                $( "#word-box").load( "http://familydoctorg.com/Gifs/login.gif");
+              $(document).ready(function () {
                 setTimeout(function()
                 {
-                  $( "#word-box" ).load( "/graph" );
+                  $("#word-box").load("/graph");
                 }, 1500);
               });
             </script>
@@ -49,15 +48,17 @@
 
       <div class="meetup-groups">
         <div class="meetup-groups-head">Suggested Meetup groups:</div>
-        <% @meetups_to_show.each do |meetup, word| %>
-          <% if meetup != nil %>
-            <div class="meetup-box">
-              Based on <strong><%= word %></strong>, we found:<br/>
-              <%= meetup["name"] %> (<%= meetup["city"] %>)<br/><br/>
-              <%= link_to "View on Meetup", meetup["link"], class: "btn btn-default" %><br/>
-            </div>
-          <% end %>
-        <% end %>
+        <div id="meetup-box">
+          <div style="text-align: center; margin-top: 45px;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
+          <script>
+            $(document).ready(function () {
+              setTimeout(function()
+              {
+                $("#meetup-box").load("/meetups");
+              }, 3000);
+            });
+          </script>
+        </div>
       </div>
     </div>
   </div>

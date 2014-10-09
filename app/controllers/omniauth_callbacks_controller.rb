@@ -1,7 +1,6 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   STATE            = SecureRandom.hex(15)
-  REDIRECT_URI_II  = 'http://localhost:3000/users/auth/linkedin/callback'
   REDIRECT_URI     = 'http://localhost:3000/profile'
 
   def client

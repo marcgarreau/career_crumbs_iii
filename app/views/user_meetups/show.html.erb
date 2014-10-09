@@ -1,0 +1,7 @@
+<% @meetups_to_show.each do |meetup| %>
+  <div class="meetup-box">
+    Based on <strong><%= meetup.word %></strong>, we found:<br/>
+    <%= meetup.name %> (<%= meetup.city %>)<br/><br/>
+    <%= link_to "View on Meetup", meetup.url, class: "btn btn-default" %>
+  </div>
+<% end %>

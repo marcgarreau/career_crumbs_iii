@@ -2,17 +2,15 @@ class WordsWorker
   include Sidekiq::Worker
 
   def perform(user_id)
-    user = User.find(user_id)
-
-    a    = Mechanize.new { |agent|
-      agent.user_agent_alias = 'Mac Safari'
-    }
-
+    user      = User.find(user_id)
+    a         = Mechanize.new { |agent| agent.user_agent_alias = 'Mac Safari' }
     job_words = []
+
     user.jobs[0..9].each do |job|
       page = a.get('https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s)
       job_words << page.search(".skills-section").text
     end
+
     format_job_words = job_words.join(" ").downcase.gsub(/[^\w\s]/, "").split(" ")
     grouped_job_words = format_job_words.group_by {|word| word}.sort_by { |words, occurrences| occurrences.count }.reverse
     top_fifteen_words = grouped_job_words[0..29].map { |word, occurrences| [word, occurrences.count] }
@@ -28,7 +26,7 @@ class WordsWorker
       "one", "all", "building", "at", "andor", "you", "are", "up",
       "that", "if", "able", "more", "year", "your", "using", "o",
       "etc", "understanding", "should", "candidate", "from", "our",
-      "will", "candidates", "application", "we", "it"]
+      "will", "candidates", "application", "we", "it", "also"]
 
     top_filtered_words = []
     top_fifteen_words.each do |word, occurrences|
@@ -37,11 +35,10 @@ class WordsWorker
 
     top_filtered_words.each do |word, occurrences|
       user.words.build(
-        value: word,
+        value:       word,
         occurrences: occurrences
       )
     end
     user.save
-
   end
 end

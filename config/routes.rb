@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboards#show', as: 'dashboard'
   get 'graph', to: 'user_graphs#show', as: 'graph'
+  get 'meetups', to: 'user_meetups#show', as: 'meetups'
 
   devise_scope :user do
     get 'login',      to: 'omniauth_callbacks#index',      as: 'login'

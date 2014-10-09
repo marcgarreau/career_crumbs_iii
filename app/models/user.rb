@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :trackable
   has_many :jobs
   has_many :words
+  has_many :meetups
 
   validates :encrypted_password, presence: true, allow_blank: true
 
