@@ -1,6 +1,6 @@
 // NAVBAR! //
 $navbar-default-bg: #fff;
-$navbar-height:     60px;
+$navbar-height:     80px !important;
 
 @import 'bootstrap';
 @import 'bootstrap-sprockets';
@@ -29,8 +29,8 @@ body {
 
 // NAVBAR! //
 .cc-title {
-  height: 40px;
-  line-height: 40px;
+  height: 80px;
+  line-height: 80px;
 }
 
 .nav-photo {
@@ -39,6 +39,20 @@ body {
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
+}
+
+.navbar-nav > li > a {
+  line-height: 60px;
+}
+
+// HOME PAGE! //
+.homebody {
+  background-color: #D3EBE5;
+}
+
+.homepage {
+  text-align: center;
+  color: white;
 }
 
 // PROFILE PAGE! //
