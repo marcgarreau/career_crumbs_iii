@@ -49,11 +49,20 @@ body {
 }
 
 .homepage {
-  text-align: center;
-  color: white;
 }
 
-// PROFILE PAGE! //
+.homepage-taste {
+  font-size: 114px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+.homepage-btn {
+  text-align: center;
+}
+
+// DASHBOARD PAGE! //
 .welcome-user-title {
   font-size: 38px;
   font-weight: bold;
@@ -67,10 +76,46 @@ body {
   color: white;
 }
 
-.profile-pic {
-  display: inline-block;
+.dashboard-user-desc {
+  margin: 10px 0 10px 10px;
 }
 
+.getting-started-title {
+  font-size: 28px;
+  color: #FFC15E;
+  font-weight: bold;
+  margin: 20px 0 -25px 0;
+  text-align: center;
+}
+
+.getting-started-center {
+  background-color: #FFEEC9;
+}
+
+.getting-started-body {
+  width: 80%;
+  padding: 25px;
+  margin: 15px auto;
+  color: #383740;
+}
+
+.dashboard-bookmarks-title {
+  font-size: 28px;
+  color: #75C986;
+  font-weight: bold;
+  margin: 20px 0 -25px 0;
+  text-align: center;
+}
+
+.empty-bookmarks {
+  border: 3px dashed black;
+  z-index:1000;
+  padding: 10px;
+  text-align: center;
+  color: #383740;
+}
+
+// SUGGESTIONS PAGE! //
 .job-words-head {
   font-size: 28px;
   color: #FFC15E;
@@ -95,6 +140,14 @@ body {
   background-color: #E8FFE9;
   padding: 15px;
   margin: 15px 0;
+}
+
+.meetup-listing {
+  font-size: 16px;
+}
+
+.meetup-listing-city {
+  font-style: italic;
 }
 
 .job-box {

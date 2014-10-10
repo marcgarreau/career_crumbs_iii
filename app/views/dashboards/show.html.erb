@@ -1,5 +1,51 @@
 <div class="container">
-Welcome to your dashboard <%= @user.first_name %>
-<br/>
-Maybe: tabs for account settings, bookmarked things, and intro to suggestions?
+  <br/>
+  <div class="row">
+    <div class="col-md-6">
+      <span class="welcome-user-title">Welcome, <%= @user.first_name %></span>
+      <div class="profile-container">
+        <div class="row">
+          <div class="col-md-2">
+            <%= image_tag @user.pic_url %>
+          </div>
+          <div class="col-md-8 dashboard-user-desc">
+            <%= @user.first_name %> <%= @user.last_name %><br/>
+            <%= @user.headline %><br/>
+            <%= @user.industry %> Industry
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="getting-started-title">
+            Getting Started
+          </div>
+          <div class="getting-started-center">
+          <div class="getting-started-body">
+            <p>Career Crumbs is a nifty little tool that helps you identify:</p>
+            <ul>
+              <li>some jobs you might be interested in,</li>
+              <li>the skills needed to get those jobs,</li>
+              <li>and how to go about getting those skills.</li>
+            </ul>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="dashboard-bookmarks-title">Your Bookmarks</div>
+      <div class="meetup-box">
+        <div class="empty-bookmarks">
+          <br/>
+          You have no bookmarks yet.<br/> Check out your suggestions and make some bookmarks!
+          <br/><br/>
+          <%= link_to "View Suggestions", i_path, class: "btn btn-default" %>
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
