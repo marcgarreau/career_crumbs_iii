@@ -26,7 +26,7 @@ class WordsWorker
       "one", "all", "building", "at", "andor", "you", "are", "up",
       "that", "if", "able", "more", "year", "your", "using", "o",
       "etc", "understanding", "should", "candidate", "from", "our",
-      "will", "candidates", "application", "we", "it", "also"]
+      "will", "candidates", "application", "we", "it", "also", "survey"]
 
     top_filtered_words = []
     top_fifteen_words.each do |word, occurrences|

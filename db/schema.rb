@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009164953) do
+ActiveRecord::Schema.define(version: 20141011215933) do
+
+  create_table "bookmarks", force: true do |t|
+    t.integer "user_id",           null: false
+    t.integer "bookmarkable_id",   null: false
+    t.string  "bookmarkable_type", null: false
+  end
+
+  user.bookmarks.each do |bookmark|
+    bookmark.name - link_to bookmark.url
+  end
+
+  add_index "bookmarks", ["user_id", "bookmarkable_id", "bookmarkable_type"], name: "bookmarks_index", unique: true
 
   create_table "jobs", force: true do |t|
     t.integer  "user_id"

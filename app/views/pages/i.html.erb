@@ -1,20 +1,4 @@
 <div class="container">
-<!--  <div class="row">
-    <div class="col-md-12">
-      <span class="welcome-user-title">Welcome, <%= @user.first_name %></span>
-      <div class="profile-container">
-        <span class="profile-pic"><%= image_tag @user.pic_url %></span>
-        <%= @user.first_name %>
-        <%= @user.last_name %>
-        <br/>
-        <%= @user.headline %>
-        <br/>
-        <strong>Industry:</strong> <%= @user.industry %>
-        <br/>
-      </div>
-    </div>
-  </div>  -->
-
   <div class="row">
     <div class="col-md-6">
       <div class="suggested-job-head"><%= @user.jobs.count %> positions you may be interested in:</div>
@@ -24,42 +8,47 @@
           <span class="suggested-job-company"><%= job.company %></span>
           <span class="suggested-job-loc">(<%= job.location %>)</span><br/>
           <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
-          <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default" %><br/>
+          <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default btn-inline" %>
+          <% if @user.bookmarks.includes?(job.id, job.class) %>
+            <%= link_to "Bookmarked", "#", class: "btn btn-success" %>
+          <% else %>
+            <%= link_to 'Bookmark', bookmarks_path(bookmark: {user_id: @user, bookmarkable_id: job.id, bookmarkable_type: job.class}), method: :post, class: "btn btn-default btn-inline" %>
+          <% end %>
         </div>
       <% end %>
     </div>
-    <div class="col-md-6">
-      <div class="job-words">
-        <div class="job-words-head">Top words found in those positions:</div>
+  <div class="col-md-6">
+    <div class="job-words">
+      <div class="job-words-head">Top words found in those positions:</div>
+      <div id="word-box">
         <div id="word-box">
-          <div id="word-box">
-            <div style="text-align: center;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
-            <script>
-              $(document).ready(function () {
-                setTimeout(function()
-                {
-                  $("#word-box").load("/graph");
-                }, 1500);
-              });
-            </script>
-          </div>
-        </div>
-      </div>
-
-      <div class="meetup-groups">
-        <div class="meetup-groups-head">Suggested Meetup groups:</div>
-        <div id="meetup-box">
-          <div style="text-align: center; margin-top: 45px;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
+          <div style="text-align: center;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
           <script>
             $(document).ready(function () {
               setTimeout(function()
               {
-                $("#meetup-box").load("/meetups");
-              }, 3000);
+                $("#word-box").load("/graph");
+              }, 1500);
             });
           </script>
         </div>
       </div>
     </div>
+
+    <div class="meetup-groups">
+      <div class="meetup-groups-head">Suggested Meetup groups:</div>
+      <div id="meetup-box">
+        <div style="text-align: center; margin-top: 45px;"><%= image_tag "http://assets-edge.vacationhomerentals.com/design/images/loading_big.gif" %></div>
+        <script>
+          $(document).ready(function () {
+            setTimeout(function()
+            {
+              $("#meetup-box").load("/meetups");
+            }, 3000);
+          });
+        </script>
+      </div>
+    </div>
   </div>
+</div>
 </div>

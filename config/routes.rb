@@ -3,11 +3,14 @@ Rails.application.routes.draw do
 
   root to: 'pages#welcome'
 
-  get 'i', to: 'pages#i', as: 'i'
+  get 'i'    , to: 'pages#i'    , as: 'i'
+  get 'intro', to: 'pages#intro', as: 'intro'
 
-  get 'dashboard', to: 'dashboards#show', as: 'dashboard'
-  get 'graph', to: 'user_graphs#show', as: 'graph'
-  get 'meetups', to: 'user_meetups#show', as: 'meetups'
+  get 'dashboard', to: 'dashboards#show',   as: 'dashboard'
+  get 'graph',     to: 'user_graphs#show',  as: 'graph'
+  get 'meetups',   to: 'user_meetups#show', as: 'meetups'
+
+  resources :bookmarks, only: [:new, :create]
 
   devise_scope :user do
     get 'login',      to: 'omniauth_callbacks#index',      as: 'login'

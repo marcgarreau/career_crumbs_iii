@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :jobs
   has_many :words
   has_many :meetups
+  has_many :bookmarks
 
   validates :encrypted_password, presence: true, allow_blank: true
 

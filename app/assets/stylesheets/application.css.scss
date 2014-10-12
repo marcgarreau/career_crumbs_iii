@@ -99,6 +99,11 @@ body {
   color: #383740;
 }
 
+.center-link {
+  margin: 25px 0 5px;
+  text-align: center;
+}
+
 .dashboard-bookmarks-title {
   font-size: 28px;
   color: #75C986;
@@ -114,6 +119,27 @@ body {
   text-align: center;
   color: #383740;
 }
+// INTRO PAGE! //
+.intro-blip {
+  background-color: #060840;
+  padding: 15px;
+  color: white;
+  text-align: center;
+}
+
+.jobs-dashed-border {
+  border: 3px dashed black;
+  z-index: 1000px;
+  padding: 185px 15px;
+  text-align: center;
+}
+
+.dashed-border {
+  border: 3px dashed black;
+  z-index: 1000px;
+  padding: 42px 15px;
+  text-align: center;
+}
 
 // SUGGESTIONS PAGE! //
 .job-words-head {
@@ -121,6 +147,10 @@ body {
   color: #FFC15E;
   font-weight: bold;
   margin: 20px 0 -25px 0;
+}
+
+.btn-inline {
+  display: inline-block;
 }
 
 #word-box {
