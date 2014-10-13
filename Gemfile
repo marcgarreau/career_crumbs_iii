@@ -33,6 +33,7 @@ gem 'mechanize'
 gem 'httparty'
 gem 'chartkick'
 gem 'sidekiq'
+gem 'figaro'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

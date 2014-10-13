@@ -11,7 +11,9 @@ RSpec.describe "LinkedIn log in", :type => :feature do
     it "logs in successfully" do
       visit root_path
       mock_auth
-      click_link_or_button "Sign in"
+      click_link_or_button "Log in"
+      # stub out the next linkedin api call for jobs
+      # then a background job goes off to scrap the jobs and return some words
       expect(page).to have_content "Welcome"
     end
   end
@@ -19,7 +21,11 @@ RSpec.describe "LinkedIn log in", :type => :feature do
   describe "a user without credentials" do
     it "does not log in successfully" do
       visit root_path
-
+      # mock_auth with bad credentials
+      OmniAuth.config.mock_auth[:linkedin] = :invalid_credentials
+      click_link_or_button "Log in"
+      expect(request.code).to eq 401
+      # get rejected
     end
   end
 end

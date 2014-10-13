@@ -19,10 +19,6 @@ ActiveRecord::Schema.define(version: 20141011215933) do
     t.string  "bookmarkable_type", null: false
   end
 
-  user.bookmarks.each do |bookmark|
-    bookmark.name - link_to bookmark.url
-  end
-
   add_index "bookmarks", ["user_id", "bookmarkable_id", "bookmarkable_type"], name: "bookmarks_index", unique: true
 
   create_table "jobs", force: true do |t|

@@ -18,7 +18,7 @@ class UserMeetupsController < ApplicationController
   def build_meetups(user, top_job_words)
     meetups = top_job_words.map do |word, _|
       response = HTTParty.get("https://api.meetup.com/find/groups", query: {
-        :key => "781a42265a47f52554b1b4a50d5b43",
+        :key => ENV[MEETUP_KEY],
         :sign => true,
         :"photo-host" => "public",
         :text => word.value,
