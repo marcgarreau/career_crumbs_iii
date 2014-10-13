@@ -37,13 +37,23 @@
     <div class="col-md-6">
       <div class="dashboard-bookmarks-title">Your Bookmarks</div>
       <div class="meetup-box">
-        <div class="empty-bookmarks">
-          <br/>
-          You have no bookmarks yet.<br/> Check out your suggestions and make some bookmarks!
-          <br/><br/>
-          <%= link_to "View Suggestions", i_path, class: "btn btn-default" %>
-          <br/><br/>
-        </div>
+        <% if @user.bookmarks.empty? %>
+          <div class="empty-bookmarks">
+            <br/>
+            You have no bookmarks yet.<br/> Check out your suggestions and make some bookmarks!
+            <br/><br/>
+            <%= link_to "View Suggestions", i_path, class: "btn btn-default" %>
+            <br/><br/>
+          </div>
+        <% else %>
+          <% @job_bookmarks.each do |job| %>
+            <div style="padding: 15px;">
+            <%= job.title %><br/>
+            <%= link_to "View on LinkedIn", "http://www.linkedin.com/jobs/2/" + job.linkedin_id.to_s, class: "btn btn-default btn-sm" %>
+            <br/>
+          </div>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
