@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'graph',     to: 'user_graphs#show',  as: 'graph'
   get 'meetups',   to: 'user_meetups#show', as: 'meetups'
 
-  resources :bookmarks, only: [:new, :create]
+  resources :bookmarks, only: [:create, :destroy]
 
   devise_scope :user do
     get 'login',      to: 'omniauth_callbacks#index',      as: 'login'

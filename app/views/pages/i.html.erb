@@ -10,7 +10,7 @@
           <span class="suggested-job-desc"><%= job.description %>...</span><br/><br/>
           <%= link_to "View on LinkedIn", 'https://www.linkedin.com/jobs2/view/' + job.linkedin_id.to_s, class: "btn btn-default btn-inline" %>
           <% if @user.bookmarks.includes?(job.id, job.class) %>
-            <%= link_to "Bookmarked", "#", class: "btn btn-success" %>
+            <%= link_to "Bookmarked", bookmark_path(@user, bookmark: {user_id: @user.id, bookmarkable_id: job.id, bookmarkable_type: job.class}), method: :delete, class: "btn btn-success" %>
           <% else %>
             <%= link_to 'Bookmark', bookmarks_path(bookmark: {user_id: @user, bookmarkable_id: job.id, bookmarkable_type: job.class}), method: :post, class: "btn btn-default btn-inline" %>
           <% end %>
