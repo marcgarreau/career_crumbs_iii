@@ -4,5 +4,10 @@
     <span class="meetup-listing"><%= meetup.name %></span><br/>
     <span class="meetup-listing-city">(<%= meetup.city %>)</span><br/><br/>
     <%= link_to "View on Meetup", meetup.url, class: "btn btn-default" %>
+    <% if @user.bookmarks.includes?(meetup.id, meetup.class) %>
+      <%= link_to "Bookmarked", bookmark_path(@user, bookmark: {user_id: @user.id, bookmarkable_id: meetup.id, bookmarkable_type: meetup.class}), method: :delete, class: "btn btn-success" %>
+    <% else %>
+      <%= link_to 'Bookmark', bookmarks_path(bookmark: {user_id: @user, bookmarkable_id: meetup.id, bookmarkable_type: meetup.class}), method: :post, class: "btn btn-default btn-inline" %>
+    <% end %>
   </div>
 <% end %>

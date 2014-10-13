@@ -3,6 +3,7 @@ class UserMeetupsController < ApplicationController
 
   def show
     @meetups_to_show = find_or_build_meetups(current_user, current_user.words)
+    @user = current_user
     render :layout => false
   end
 

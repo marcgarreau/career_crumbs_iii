@@ -46,12 +46,25 @@
             <br/><br/>
           </div>
         <% else %>
-          <% @job_bookmarks.each do |job| %>
-            <div style="padding: 15px;">
-            <%= job.title %><br/>
-            <%= link_to "View on LinkedIn", "http://www.linkedin.com/jobs/2/" + job.linkedin_id.to_s, class: "btn btn-default btn-sm" %>
-            <br/>
-          </div>
+          <% if @job_bookmarks.any? %>
+            <div class="bookmark-subtitle">Jobs</div>
+            <% @job_bookmarks.each do |job| %>
+              <div style="padding: 15px;">
+                <%= job.title %><br/>
+                <%= link_to "View on LinkedIn", "http://www.linkedin.com/jobs/2/" + job.linkedin_id.to_s, class: "btn btn-default btn-sm" %>
+                <br/>
+              </div>
+            <% end %>
+          <% end %>
+          <% if @meetup_bookmarks.any? %>
+            <div class="bookmark-subtitle">Meetups</div>
+            <% @meetup_bookmarks.each do |meetup| %>
+              <div style="padding: 15px;">
+                <%= meetup.name %><br/>
+                <%= link_to "View on Meetup", meetup.url, class: "btn btn-default btn-sm" %>
+                <br/>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
