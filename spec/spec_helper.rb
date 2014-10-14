@@ -14,7 +14,9 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
-RSpec.configure do |config|
+
+#RSpec.configure do |config|
+
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
 =begin
@@ -75,4 +77,34 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+#end
+
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+require 'rspec/autorun'
+
+require 'capybara/rspec'
+require 'capybara/rails'
+require 'rack_session_access/capybara'
+
+require 'active_support'
+require 'active_support/core_ext'
+
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
+RSpec.configure do |config|
+  # config.include(OmniauthMacros)
+
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  config.use_transactional_fixtures = true
+
+  config.infer_base_class_for_anonymous_controllers = false
+
+  config.order = "random"
 end
+
+Capybara.server_port = 1234
+OmniAuth.config.test_mode = true
+

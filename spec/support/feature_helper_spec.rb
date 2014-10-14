@@ -2,8 +2,8 @@ module FeatureSpecHelper
   def mock_auth
     OmniAuth.config.mock_auth[:linkedin] = OmniAuth::AuthHash.new({
       :provider => 'linkedin',
-      :uid => '123545',
-      :redirect_uri => 'http://localhost:3000/profile'
+      :uid => '123545'
+    #  :redirect_uri => 'http://localhost:3000/profile'
     })
   end
 

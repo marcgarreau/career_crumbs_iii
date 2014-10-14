@@ -79,6 +79,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @picture_url      = body["pictureUrl"]
     @headline         = body["headline"]
     @email_address    = body["emailAddress"]
+    binding.pry
   end
 
   def build_user
