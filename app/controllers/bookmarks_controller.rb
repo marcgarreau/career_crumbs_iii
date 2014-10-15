@@ -18,10 +18,10 @@ class BookmarksController < ApplicationController
     )
     if @bookmark.save
       flash[:notice] = "Bookmarked!"
-      redirect_to i_path
+      redirect_to suggestions_path
     else
       flash[:error] = "Something went wrong"
-      redirect_to i_path
+      redirect_to suggestions_path
     end
   end
 
@@ -32,10 +32,10 @@ class BookmarksController < ApplicationController
     )
     if bm.delete
       flash[:notice] = "Bookmark removed"
-      redirect_to i_path
+      redirect_to suggestions_path
     else
       flash[:error] = "Something went wrong."
-      redirect_to i_path
+      redirect_to suggestions_path
     end
   end
 

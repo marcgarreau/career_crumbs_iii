@@ -1,7 +1,7 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
-  STATE            = SecureRandom.hex(15)
-  REDIRECT_URI     = 'http://localhost:3000/profile'
+  STATE        = SecureRandom.hex(15)
+  REDIRECT_URI = 'http://localhost:3000/profile'
 
   def client
     client = OAuth2::Client.new(
@@ -14,11 +14,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def all
-    authorize
-  end
-
-  def index
-    authorize
+#    authorize
   end
 
   def authorize
@@ -79,7 +75,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @picture_url      = body["pictureUrl"]
     @headline         = body["headline"]
     @email_address    = body["emailAddress"]
-    binding.pry
   end
 
   def build_user

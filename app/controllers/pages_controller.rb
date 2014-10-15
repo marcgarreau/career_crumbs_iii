@@ -4,7 +4,7 @@ class PagesController < ApplicationController
     redirect_to dashboard_path if current_user
   end
 
-  def i
+  def suggestions
     @user = current_user
   end
 
