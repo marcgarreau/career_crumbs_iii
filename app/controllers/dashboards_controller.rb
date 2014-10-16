@@ -1,4 +1,5 @@
 class DashboardsController < ApplicationController
+  before_filter :authenticate_user!
 
   def show
     @user             = current_user
@@ -7,5 +8,4 @@ class DashboardsController < ApplicationController
     m_bookmarks       = @user.bookmarks.where(bookmarkable_type: "Meetup")
     @meetup_bookmarks = m_bookmarks.map { |bm| @user.meetups.find_by_id(bm.bookmarkable_id) }
   end
-
 end
