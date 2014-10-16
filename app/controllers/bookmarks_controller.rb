@@ -1,5 +1,4 @@
 class BookmarksController < ApplicationController
-  before_filter :authenticate_user!
 
   def index
     @bookmarkable = find_bookmarkable
