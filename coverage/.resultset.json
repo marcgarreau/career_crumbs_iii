@@ -1,0 +1,117 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/models/user.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/helpers/omniauth_callbacks_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/helpers/pages_helper.rb": [
+        1,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/models/job.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/models/word.rb": [
+        1,
+        1,
+        null,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/models/meetup.rb": [
+        1,
+        1,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/controllers/application_controller.rb": [
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/controllers/dashboards_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null
+      ],
+      "/Users/marcgarreau/Dropbox/Projects/Turing/career_crumbs_iii/app/controllers/pages_controller.rb": [
+        1,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1413473855
+  }
+}

@@ -34,6 +34,7 @@ gem 'httparty'
 gem 'chartkick'
 gem 'sidekiq'
 gem 'figaro'
+gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
