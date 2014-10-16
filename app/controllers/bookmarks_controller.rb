@@ -10,8 +10,7 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    # @bookmarkable = find_bookmarkable
-    @bookmark     = current_user.bookmarks.build(
+    @bookmark = current_user.bookmarks.build(
       user_id: params[:bookmark]["user_id"].to_i,
       bookmarkable_type: params[:bookmark]["bookmarkable_type"],
       bookmarkable_id: params[:bookmark]["bookmarkable_id"].to_i
