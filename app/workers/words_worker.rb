@@ -2,11 +2,11 @@ class WordsWorker
   include Sidekiq::Worker
 
   def perform(user_id)
-    user               = grab_user(user_id)
+    user               = User.find_by_id(user_id)
     agent              = build_mechanize_agent
     job_words          = scrape_api_results(user, agent)
     top_filtered_words = format_results(job_words)
-    build_words(top_filtered_words)
+    build_words(top_filtered_words, user)
   end
 
   def grab_user(user_id)
@@ -52,7 +52,7 @@ class WordsWorker
     top_filtered_words
   end
 
-  def build_words(top_filtered_words)
+  def build_words(top_filtered_words, user)
     top_filtered_words.each do |word, occurrences|
       user.words.build(
         value:       word,

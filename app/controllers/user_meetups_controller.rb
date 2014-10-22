@@ -17,26 +17,23 @@ class UserMeetupsController < ApplicationController
   end
 
   def build_meetups(user, top_job_words)
-    meetups = top_job_words.map do |word, _|
-      response = HTTParty.get("https://api.meetup.com/find/groups", query: {
-        :key => ENV["MEETUP_KEY"],
-        :sign => true,
-        :"photo-host" => "public",
-        :text => word.value,
-        :location => user.location,
-        :page => 1,
-      })
+    location  = user.location.gsub(" ", "")
+    meetups   = []
 
-      meetup = response.first
-      {
+    top_job_words.each do |word, _|
+      response = HTTParty.get("https://api.meetup.com/find/groups?&key=781a42265a47f52554b1b4a50d5b43&sign=true&photo-host=public&text=#{word.value}&location=#{location}&page=1")
+      meetups << [response.first, word.value]
+    end
+
+    meetups.each do |meetup, word|
+      user.meetups.build(
         name:     meetup["name"],
         city:     meetup["city"],
         url:      meetup["link"],
-        word:     word.value,
-      }
+        word:     word,
+        user_id:  user.id
+      )
     end
-
-    user.meetups.create(meetups)
-    user.meetups
+    user.save
   end
 end
