@@ -1,4 +1,7 @@
-## README
+## Career Crumbs
+This was a three-week independent project aimed at providing a user with jobs they might like, skills they’ll need to get those jobs, and where to learn those skills.
+
+In this app, a user logs in with LinkedIn and is shown real job listings on LinkedIn they might be interested in, based on their LinkedIn profile data. The 'qualifications' section of each of those jobs are then scraped to find important keywords that show up most frequently, indicating the skills employers are asking for. Each of those keywords are then used to search for Meetup.com groups - an effort to discover one avenue where you can learn that particular skill.
 
 ###iteration guide:
 
